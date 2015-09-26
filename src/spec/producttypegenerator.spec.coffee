@@ -1,10 +1,9 @@
-ProductTypeGenerator = require('../main').ProductTypeGenerator
+ProductTypeGenerator = require '../lib/product-type-generator'
 
 describe 'ProductTypeGenerator', ->
+
   beforeEach ->
     @generator = new ProductTypeGenerator
-
-  it 'should initialize', ->
     expect(@generator).toBeDefined()
 
   it 'should return languages for localized property header', ->
@@ -18,7 +17,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'gender'
       type: 'lenum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Geschlecht'
@@ -37,7 +36,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'description'
       type: 'text'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
@@ -50,10 +49,11 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Beschreibung'
           en: 'Description'
-        type: 'text'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'text'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
         inputHint: 'MultiLine'
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
@@ -63,7 +63,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'description'
       type: 'ltext'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
@@ -76,10 +76,11 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Beschreibung'
           en: 'Description'
-        type: 'ltext'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'ltext'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
         inputHint: 'MultiLine'
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
@@ -89,7 +90,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow1 =
       name: 'brand'
       type: 'enum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Marke'
@@ -100,7 +101,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow2 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       sSearchable: ''
       'label.de': ''
@@ -114,11 +115,12 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Marke'
           en: 'Brand'
-        type: 'enum'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
-        values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        type:
+          name: 'enum'
+          values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
@@ -127,7 +129,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow1 =
       name: 'gender'
       type: 'lenum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Geschlecht'
@@ -139,7 +141,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow2 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       sSearchable: ''
       'label.de': ''
@@ -151,7 +153,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow3 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       isSearchable: ''
       'label.de': ''
@@ -166,11 +168,12 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Geschlecht'
           en: 'gender'
-        type: 'lenum'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
-        values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
+        type:
+          name: 'lenum'
+          values: [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 
@@ -179,7 +182,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'size'
       type: 'number'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Größe'
@@ -191,10 +194,11 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Größe'
           en: 'Size'
-        type: 'number'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'number'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -203,7 +207,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'listPrice'
       type: 'money'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Listenpreis'
@@ -215,10 +219,11 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Listenpreis'
           en: 'List price'
-        type: 'money'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'money'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -228,7 +233,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'releaseDate'
       type: 'date'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Veröffentlichungsdatum'
@@ -240,10 +245,11 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Veröffentlichungsdatum'
           en: 'Release date'
-        type: 'date'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'date'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -252,7 +258,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'releaseTime'
       type: 'time'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Veröffentlichungszeit'
@@ -264,10 +270,88 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Veröffentlichungszeit'
           en: 'Release time'
-        type: 'time'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'time'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+  it 'should return one attribute definition of type datetime', ->
+
+    attributeRow =
+      name: 'releaseTime'
+      type: 'datetime'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Veröffentlichungszeit'
+      'label.en': 'Release time'
+
+    expectedAttributeDefinition =
+      releaseTime:
+        name: 'releaseTime'
+        label:
+          de: 'Veröffentlichungszeit'
+          en: 'Release time'
+        type:
+          name: 'datetime'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
+  it 'should return one attribute definition of type time', ->
+
+    attributeRow =
+      name: 'releaseTime'
+      type: 'time'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Veröffentlichungszeit'
+      'label.en': 'Release time'
+
+    expectedAttributeDefinition =
+      releaseTime:
+        name: 'releaseTime'
+        label:
+          de: 'Veröffentlichungszeit'
+          en: 'Release time'
+        type:
+          name: 'time'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
+  it 'should return one attribute definition of type boolean', ->
+
+    attributeRow =
+      name: 'isSupported'
+      type: 'boolean'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Unterstützt'
+      'label.en': 'Supported'
+
+    expectedAttributeDefinition =
+      isSupported:
+        name: 'isSupported'
+        label:
+          de: 'Unterstützt'
+          en: 'Supported'
+        type:
+          name: 'boolean'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -276,7 +360,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'creationDateTime'
       type: 'dateTime'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Herstellungszeit'
@@ -288,40 +372,126 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Herstellungszeit'
           en: 'Creation time'
-        type: 'dateTime'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'dateTime'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type set (elementtype text)', ->
 
-  it 'should return an array with product type definitions', ->
+    attributeRow =
+      name: 'infoLines'
+      type: 'set:text'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Info Zeilen'
+      'label.en': 'Info Lines'
+      textInputHint: 'MultiLine'
 
-    productTypeDefinition1 =
-      name: 'ProductType1'
-      description: 'Description1'
+    expectedAttributeDefinition =
+      infoLines:
+        name: 'infoLines'
+        label:
+          de: 'Info Zeilen'
+          en: 'Info Lines'
+        type:
+          name: 'set'
+          elementType:
+            name: 'text'
+        attributeConstraint: 'None'
+        inputHint: 'MultiLine'
+        isRequired: false
+        isSearchable: false
 
-    productTypeDefinition2 =
-      name: 'ProductType2'
-      description: 'Description2'
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
-    productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
+  it 'should return one attribute definition of type set (elementtype enum)', ->
 
-    attributeDefinitions = []
+    attributeRow1 =
+      name: 'brand'
+      type: 'set:enum'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Marke'
+      'label.en': 'Brand'
+      enumKey: 'HUG'
+      enumLabel: 'Hugo Boss'
 
-    expectedProductTypeDefinition1 =
-      name: 'ProductType1'
-      description: 'Description1'
+    attributeRow2 =
+      name: ''
+      type: ''
+      attributeConstraint: ''
+      isRequired: ''
+      sSearchable: ''
+      'label.de': ''
+      'label.en': ''
+      enumKey: 'DUG'
+      'enumLabel': 'Dolce&Gabana'
 
-    expectedProductTypeDefinition2 =
-      name: 'ProductType2'
-      description: 'Description2'
+    expectedAttributeDefinition =
+      brand:
+        name: 'brand'
+        label:
+          de: 'Marke'
+          en: 'Brand'
+        type:
+          name: 'set'
+          elementType:
+            name: 'enum'
+            values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
-    expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
+  it 'should return one attribute definition of type set (elementtype set with elementtype enum)', ->
 
+    attributeRow1 =
+      name: 'brand'
+      type: 'set:set:enum'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Marke'
+      'label.en': 'Brand'
+      enumKey: 'HUG'
+      enumLabel: 'Hugo Boss'
+
+    attributeRow2 =
+      name: ''
+      type: ''
+      attributeConstraint: ''
+      isRequired: ''
+      sSearchable: ''
+      'label.de': ''
+      'label.en': ''
+      enumKey: 'DUG'
+      'enumLabel': 'Dolce&Gabana'
+
+    expectedAttributeDefinition =
+      brand:
+        name: 'brand'
+        label:
+          de: 'Marke'
+          en: 'Brand'
+        type:
+          name: 'set'
+          elementType:
+            name: 'set'
+            elementType:
+              name: 'enum'
+              values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
   it 'should return an array with product type definitions with mastersku', ->
 
@@ -335,14 +505,15 @@ describe 'ProductTypeGenerator', ->
 
     productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
 
-    masterSKU =
+    mastersku =
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions = []
@@ -350,16 +521,16 @@ describe 'ProductTypeGenerator', ->
     expectedProductTypeDefinition1 =
       name: 'ProductType1'
       description: 'Description1'
-      attributes: [masterSKU]
+      attributes: [mastersku]
 
     expectedProductTypeDefinition2 =
       name: 'ProductType2'
       description: 'Description2'
-      attributes: [masterSKU]
+      attributes: [mastersku]
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
 
   it 'should return an array with product type definitions with attributes', ->
 
@@ -375,14 +546,15 @@ describe 'ProductTypeGenerator', ->
 
     productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
 
-    masterSKU =
+    mastersku =
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
     size =
@@ -390,10 +562,11 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     information =
@@ -401,10 +574,11 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Information'
         en: 'Information'
-      type: 'text'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
@@ -414,16 +588,16 @@ describe 'ProductTypeGenerator', ->
     expectedProductTypeDefinition1 =
       name: 'ProductType1'
       description: 'Description1'
-      attributes: [information, masterSKU]
+      attributes: [information, mastersku]
 
     expectedProductTypeDefinition2 =
       name: 'ProductType2'
       description: 'Description2'
-      attributes: [size, masterSKU]
+      attributes: [size, mastersku]
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
 
   it 'should skip product types with unkown product attributes', ->
 
@@ -444,21 +618,28 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
       size: size
 
-    expectedProductTypeDefinition1 =
-      name: 'ProductType2'
-      description: 'Description2'
-      attributes: [size]
-
-    expectedProductTypeDefinitions = [expectedProductTypeDefinition1]
+    expectedProductTypeDefinitions = [
+      {
+        name: 'ProductType1'
+        description: 'Description1'
+        attributes: []
+      },
+      {
+        name: 'ProductType2'
+        description: 'Description2'
+        attributes: [size]
+      }
+    ]
 
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
 
@@ -474,10 +655,11 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
@@ -491,25 +673,65 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Größe'
           en: 'Size'
-        type: 'number'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        type:
+          name: 'number'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
         inputHint: 'SingleLine'
       ]
 
     expect(@generator._createProductTypesDefinitions([productTypeDefinition], attributeDefinitions)).toEqual [expectedProductTypeDefinition]
 
-  it 'should return attribute definition for attribute masterSKU', ->
+  it 'should return attribute definition for attribute mastersku', ->
 
     expectedAttributeDefinition =
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      type:
+        name: 'text'
+      attributeConstraint: 'Unique'
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
-    expect(@generator._createAttributeDefinitionMasterSku()).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitionMastersku()).toEqual expectedAttributeDefinition
+
+  it 'should return an attribute definition of type reference', ->
+
+    attributeRow =
+      name: 'zone_reference'
+      type: 'reference:zone'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Zone (de)'
+      'label.en': 'Zone (en)'
+
+    expectedAttributeDefinition =
+      zone_reference:
+        name: 'zone_reference'
+        label:
+          de: 'Zone (de)'
+          en: 'Zone (en)'
+        type:
+          name: 'reference'
+          referenceTypeId: 'zone'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+  it 'should split and return attribute element type or ettribute type', ->
+
+    expect(@generator._typeOrElementType('set:set:type')).toBe 'set:type'
+    expect(@generator._typeOrElementType('set:type')).toBe 'type'
+    expect(@generator._typeOrElementType('type')).toBe 'type'
+
+  it 'should split and return attribute type', ->
+
+    expect(@generator._type('set:set:type')).toBe 'set'
+    expect(@generator._type('set:type')).toBe 'set'
+    expect(@generator._type('type')).toBe 'type'
