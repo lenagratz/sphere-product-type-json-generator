@@ -44,7 +44,7 @@ node lib/run.js --types data/sample-product-types.csv --attributes \
 
 ### How to test
 
-Specs are located under `/src/spec` and written as [Jasmine](http://pivotal.github.io/jasmine/) test.
+Specs are located under `/src/spec` and written as [Jasmine](https://jasmine.github.io/) test.
 ```bash
 grunt test
 ```
